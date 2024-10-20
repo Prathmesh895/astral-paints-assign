@@ -1,4 +1,3 @@
-// components/Blogs.js
 "use client";
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector} from '@/app/store/hooks/index';
@@ -14,7 +13,6 @@ function Blogs() {
     dispatch(fetchHomepageData());
   }, [dispatch]);
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   const homepageData = data?.pages?.nodes[0]?.homepage;

@@ -12,7 +12,6 @@ function Category() {
     dispatch(fetchHomepageData());
   }, [dispatch]);
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   // Add a check to ensure homepageData is defined

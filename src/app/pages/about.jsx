@@ -5,21 +5,25 @@ import { fetchHomepageData, selectHomepageData } from '@/app/store/slice/HomeDat
 import Image from 'next/image';
 import Link from 'next/link';
 
+// Utility function to strip HTML tags
+const stripHtmlTags = (html) => {
+  return html.replace(/<[^>]*>/g, ''); // Remove all HTML tags
+};
+
 function About() {
   const dispatch = useAppDispatch();
   const { data, loading, error } = useAppSelector(selectHomepageData);
+  console.log(data);
 
   useEffect(() => {
     dispatch(fetchHomepageData());
   }, [dispatch]);
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   // Add a check to make sure homepageData is defined before accessing its properties
   const homepageData = data?.pages?.nodes[0]?.homepage;
   const seoData = data?.pages?.nodes[0]?.seo;
-
 
   return (
     <div className='flex lg:flex-row flex-col-reverse justify-between'>
@@ -28,13 +32,13 @@ function About() {
         <>
           <div className='basis-[60%] md:mt-16 mt-10 md:px-32 px-5'>
             <p className='font-semibold text-2xl drop-shadow hidden md:block' data-aos="fade-up">
-              {homepageData.homeAboutSubtitle}
+              {stripHtmlTags(homepageData.homeAboutSubtitle)} {/* Strip HTML tags */}
             </p>
             <h3 className='text-3xl font-bold pb-5 drop-shadow hidden md:block' data-aos="fade-up">
-              {homepageData.homeAboutTitle}
+              {stripHtmlTags(homepageData.homeAboutTitle)} {/* Strip HTML tags */}
             </h3>
             <p className='text-gray-600 lg:text-base md:text-sm' data-aos="fade-up">
-              {homepageData.homeAboutDescription}
+              {stripHtmlTags(homepageData.homeAboutDescription)} {/* Strip HTML tags */}
             </p>
             <br />
 
@@ -46,10 +50,10 @@ function About() {
 
           <div className='basis-[40%] lg:px-0 md:px-32'>
             <p className='font-semibold text-2xl drop-shadow mx-3 md:mt-0 mt-5 md:hidden block'>
-              {homepageData.homeAboutSubtitle}
+              {stripHtmlTags(homepageData.homeAboutSubtitle)} {/* Strip HTML tags */}
             </p>
             <h3 className='text-3xl font-bold pb-5 drop-shadow mx-3 md:hidden block'>
-              {homepageData.homeAboutTitle}
+              {stripHtmlTags(homepageData.homeAboutTitle)} {/* Strip HTML tags */}
             </h3>
             <Image
               src={homepageData.homeAboutVideoImage?.node?.sourceUrl || '/placeholder-image.png'}

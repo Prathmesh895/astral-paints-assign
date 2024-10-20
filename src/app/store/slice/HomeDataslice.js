@@ -1,4 +1,3 @@
-// store/homepageSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import client from '@/app/lib/apollo-client';
 import { HOMEPAGE_QUERY } from '@/app/lib/queries';

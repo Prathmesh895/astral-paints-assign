@@ -16,7 +16,6 @@ function Banner() {
     dispatch(fetchHomepageData());
   }, [dispatch]);
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   const homepageData = data?.pages?.nodes[0]?.homepage;

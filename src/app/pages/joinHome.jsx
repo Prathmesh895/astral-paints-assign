@@ -3,17 +3,20 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks/index';
 import { fetchHomepageData, selectHomepageData } from '@/app/store/slice/HomeDataslice';
 import Image from 'next/image';
-import Link from 'next/link'; // Import Link for navigation
+import Link from 'next/link'; 
+
+const stripHtmlTags = (html) => {
+  return html.replace(/<[^>]*>/g, ''); // Remove all HTML tags
+};
 
 function JionHome() {
   const dispatch = useAppDispatch();
-  const { data, loading, error } = useAppSelector(selectHomepageData);
+  const { data, error } = useAppSelector(selectHomepageData);
 
   useEffect(() => {
     dispatch(fetchHomepageData());
   }, [dispatch]);
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   // Add a check to ensure homepageData is defined
@@ -34,9 +37,9 @@ function JionHome() {
         className='-z-10 w-full lg:h-full md:h-[300px] h-[340px]'
       />
       <div className='absolute lg:top-1/4 md:top-[20%] top-10 space-y-2 lg:px-[400px] px-10 text-center text-white' data-aos="fade-up">
-        <h1>{homepageData.homeJoinSubtitle}</h1>
-        <h1 className='text-3xl font-bold'>{homepageData.homeJoinTitle}</h1>
-        <h1>{homepageData.homeJoinDescription}</h1>
+        <h1>{stripHtmlTags(homepageData.homeJoinSubtitle)}</h1>
+        <h1 className='text-3xl font-bold'>{stripHtmlTags(homepageData.homeJoinTitle)}</h1>
+        <h1>{stripHtmlTags(homepageData.homeJoinDescription)}</h1>
         <Link href='#' className="text-black bg-white rounded-full mt-1 py-2 px-5 font-semibold md:text-sm">
           <button className='mt-5'>Read More</button>
         </Link>

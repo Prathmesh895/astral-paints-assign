@@ -6,6 +6,7 @@ import Services from '@/app/pages/services'
 import JoinHome from "./pages/joinHome";
 import Blogs from "./pages/blogs";
 import Banner from "./pages/banners";
+import Colors from "./pages/colors";
 import AOSWrapper from '@/app/lib/aoswrapper';
 import Image from 'next/image';
 
@@ -14,7 +15,9 @@ function Page() {
   return (
     <AOSWrapper>
       <div>
+        {/* first section of home page */}
         <Banner />
+        {/* Rainbow Img */}
         <div className="z-10">
           <Image
             src="/rainbow-new.svg"
@@ -25,15 +28,16 @@ function Page() {
           />
         </div>
         {/* About section  */}
-        <About />
+        <section id="about"> <About /> </section>
         {/* categories  */}
-        <Category />
+        <section id="category" > <Category /> </section>
         {/* Services */}
-        <Services />
+        <section id="services"> <Services /> </section>
         {/* join homepage Data */}
-        <JoinHome />
+        <section id="become-a-dealer"> <JoinHome /> </section>
+        <Colors/>
         {/* Blogs */}
-        <Blogs />
+        <section id="blogs"> <Blogs /> </section>
       </div>
     </AOSWrapper>
   );
